@@ -93,5 +93,6 @@ namespace GrpcLibrary {
             Volme           = 0m;
             //Remark        = null;
         }
+
     }
 }
