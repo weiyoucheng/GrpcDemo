@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace GrpcLibrary {
     /// <summary>
     /// 登陆服务接口
     /// </summary>
+    [ServiceContract]
     public interface ILoginService {
 
         /// <summary>
@@ -21,6 +23,7 @@ namespace GrpcLibrary {
         /// 用于获取请求头信息及远程取消等等。
         /// </param>
         /// <returns></returns>
+        [OperationContract]
         ValueTask<LoginMessage> LoginAsync(UserInfo userInfo,CallContext context = default);
 
     }

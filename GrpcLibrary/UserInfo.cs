@@ -24,14 +24,22 @@ namespace GrpcLibrary {
         [DataMember(Order = 2)]
         public string Password { get; set; }
 
+        /// <summary>
+        /// 所属网点
+        /// </summary>
+        [DataMember(Order = 3)]
+        public string SiteName { get; set; }
+
         public UserInfo() {
             UserName = string.Empty;
             Password = string.Empty;
+            SiteName = string.Empty;
         }
 
-        public UserInfo(string userName,string password ) {
+        public UserInfo(string userName,string password,string siteName) {
             UserName = userName;
             Password = password;
+            SiteName = siteName;
         }
 
     }

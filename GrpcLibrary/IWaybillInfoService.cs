@@ -5,11 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
+using ProtoBuf.Grpc.Configuration;
+using System.ServiceModel;
 
 namespace GrpcLibrary {
     /// <summary>
     /// 运单信息服务接口
     /// </summary>
+    [ServiceContract]
     public interface IWaybillInfoService {
 
         /// <summary>
@@ -21,6 +24,7 @@ namespace GrpcLibrary {
         /// 用于获取请求头信息及远程取消等等。
         /// </param>
         /// <returns>符合查询条件的运单列表</returns>
+        [OperationContract]
         ValueTask<ResponseMessage<List<WaybillData>>> QueryWaybill(QueryWaybillRequest request,CallContext context);
 
     }
