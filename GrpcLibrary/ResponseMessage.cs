@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
+using ProtoBuf;
+using Microsoft.VisualBasic;
 
 namespace GrpcLibrary {
 
@@ -11,6 +13,7 @@ namespace GrpcLibrary {
     /// 相应消息
     /// </summary>
     [DataContract]
+    [ProtoInclude(6, typeof(LoginMessage))]
     public class ResponseMessage<T> {
 
         /// <summary>
@@ -39,15 +42,15 @@ namespace GrpcLibrary {
 
         public ResponseMessage() {
             StatusCode = System.Net.HttpStatusCode.OK;
-            Message    = string.Empty;
-            IsSuccess  = false;
-            Result     = default!;
+            Message = string.Empty;
+            IsSuccess = false;
+            Result = default!;
         }
-        public ResponseMessage(System.Net.HttpStatusCode statusCode, string message, bool isSuccess,T result) {
+        public ResponseMessage(System.Net.HttpStatusCode statusCode, string message, bool isSuccess, T result) {
             StatusCode = statusCode;
-            Message    = message;
-            IsSuccess  = isSuccess;
-            Result     = result;
+            Message = message;
+            IsSuccess = isSuccess;
+            Result = result;
         }
     }
 

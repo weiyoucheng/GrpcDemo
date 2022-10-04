@@ -19,69 +19,76 @@ namespace GrpcLibrary {
         public string EwbNo { get; set; }
 
         /// <summary>
-        /// 寄件日期
+        /// 网点名称
         /// </summary>
         [DataMember(Order = 3)]
+        public string SiteName { get; set; }
+
+        /// <summary>
+        /// 寄件日期
+        /// </summary>
+        [DataMember(Order = 4)]
         public DateTime SendDate { get; set; }
 
         /// <summary>
         /// 发件地址
         /// </summary>
-        [DataMember(Order = 4)]
+        [DataMember(Order = 5)]
         public string SendAddress { get; set; }
 
         /// <summary>
         /// 发件客户
         /// </summary>
-        [DataMember(Order = 5)]
+        [DataMember(Order = 6)]
         public string SendCustomer { get; set; }
 
         /// <summary>
         /// 发件电话
         /// </summary>
-        [DataMember(Order = 6)]
+        [DataMember(Order = 7)]
         public string SendPhone { get; set; }
 
         /// <summary>
         /// 收件客户
         /// </summary>
-        [DataMember(Order = 7)]
+        [DataMember(Order = 8)]
         public string ReceiveCustomer { get; set; }
 
         /// <summary>
         /// 收件电话
         /// </summary>
-        [DataMember(Order = 8)]
+        [DataMember(Order = 9)]
         public string ReceivePhone { get; set; }
 
         /// <summary>
         /// 收件地址
         /// </summary>
-        [DataMember(Order = 9)]
+        [DataMember(Order = 10)]
         public string ReceiveAddress { get; set; }
 
         /// <summary>
         /// 结算重量
         /// </summary>
-        [DataMember(Order = 10)]
+        [DataMember(Order = 11)]
         public decimal Weight { get; set; }
 
         /// <summary>
         /// 体积
         /// </summary>
-        [DataMember(Order = 11)]
+        [DataMember(Order = 12)]
         public decimal Volme { get; set; }
 
         /// <summary>
         /// 备注
         /// </summary>
-        [DataMember(Order = 12)]
+        [DataMember(Order = 13)]
         public string? Remark { get; set; }
 
 
         public WaybillData() {
             //Id            = 0;
             EwbNo           = string.Empty;
+            SiteName        = string.Empty;
             //SendDate      = null!;
             SendAddress     = string.Empty;
             SendCustomer    = string.Empty;

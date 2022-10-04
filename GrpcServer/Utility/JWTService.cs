@@ -4,22 +4,32 @@ using System.Security.Claims;
 using System.Text;
 
 namespace GrpcServer.Utility {
+
+    /// <summary>
+    /// JWT服务
+    /// </summary>
     public class JWTService : IJWTService {
+
         private readonly IConfiguration _configuration;
         public JWTService(IConfiguration configuration) {
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// 获取Token值
+        /// </summary>
+        /// <param name="userName">要获取Token的用户</param>
+        /// <returns></returns>
         public string GetToken(string userName) {
-            //var userInfo = 
             Claim[] claims = new[]{
                 new Claim(JwtRegisteredClaimNames.Name,userName),
-                new Claim(JwtRegisteredClaimNames.Name,userName),
-                new Claim(JwtRegisteredClaimNames.Sub,DateTime.Now.Ticks.ToString())
+                new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.UniqueName,"admin"),
+                new Claim(JwtRegisteredClaimNames.AuthTime,DateTime.Now.Ticks.ToString())
             };
 
             //获取配置文件安全秘钥信息
-            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SecurityKey"]));
+            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration[Constants.SECURITYKEY]));
             SigningCredentials creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             /**
@@ -34,9 +44,9 @@ namespace GrpcServer.Utility {
             * */
             var token = new JwtSecurityToken(
                 //签发人
-                issuer            : _configuration["issuer"],
+                issuer            : _configuration[Constants.VALIDISSUER],
                 //与签发人要保持一致
-                audience          : _configuration["audience"],
+                audience          : _configuration[Constants.VALIDAUDIENCE],
                 claims            : claims,
                 notBefore         : DateTime.Now,                    //token生效时间
                 expires           : DateTime.Now.AddHours(24), //有效期

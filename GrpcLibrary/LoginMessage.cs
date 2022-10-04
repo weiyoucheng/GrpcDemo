@@ -4,20 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
+using ProtoBuf;
 
 namespace GrpcLibrary {
 
     /// <summary>
     /// 登陆返回消息类
     /// </summary>
-    [DataContract]
-    public class LoginMessage:ResponseMessage<string> {
+    [ProtoContract()]
+    public class LoginMessage: ResponseMessage<string> {
 
-        [DataMember(Order = 5)]
+        [ProtoMember(1)]
         public string Token { get; set; }
 
-        public LoginMessage():base() {
+        public LoginMessage() : base() {
             Token = string.Empty;
         }
+
     }
 }

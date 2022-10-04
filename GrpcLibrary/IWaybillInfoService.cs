@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using ProtoBuf.Grpc.Configuration;
 using System.ServiceModel;
+using ProtoBuf;
 
 namespace GrpcLibrary {
     /// <summary>
     /// 运单信息服务接口
     /// </summary>
-    [ServiceContract]
+    [Service]
     public interface IWaybillInfoService {
 
         /// <summary>
@@ -24,7 +25,7 @@ namespace GrpcLibrary {
         /// 用于获取请求头信息及远程取消等等。
         /// </param>
         /// <returns>符合查询条件的运单列表</returns>
-        [OperationContract]
+        [Operation]
         ValueTask<ResponseMessage<List<WaybillData>>> QueryWaybill(QueryWaybillRequest request,CallContext context);
 
     }
@@ -32,19 +33,19 @@ namespace GrpcLibrary {
     /// <summary>
     /// 查询运单请求类
     /// </summary>
-    [DataContract]
+    [ProtoContract]
     public class QueryWaybillRequest {
 
         /// <summary>
         /// 寄件开始时间
         /// </summary>
-        [DataMember(Order = 1)]
+        [ProtoMember(1)]
         public DateTime StartDate { get; set; }
 
         /// <summary>
         /// 寄件截止时间
         /// </summary>
-        [DataMember(Order = 2)]
+        [ProtoMember(2)]
         public DateTime EndDate { get; set; }
 
     }

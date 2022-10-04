@@ -1,4 +1,5 @@
 ﻿using ProtoBuf.Grpc;
+using ProtoBuf.Grpc.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace GrpcLibrary {
     /// <summary>
     /// 登陆服务接口
     /// </summary>
-    [ServiceContract]
+    [Service]
     public interface ILoginService {
 
         /// <summary>
@@ -23,8 +24,13 @@ namespace GrpcLibrary {
         /// 用于获取请求头信息及远程取消等等。
         /// </param>
         /// <returns></returns>
-        [OperationContract]
+        [Operation]
         ValueTask<LoginMessage> LoginAsync(UserInfo userInfo,CallContext context = default);
 
+        [Operation]
+        ValueTask<ResponseMessage<string>> Login2Async(UserInfo userInfo, CallContext context = default);
+
+        [Operation]
+        ValueTask<string> Login2Async(string userName,string password, CallContext context = default);
     }
 }

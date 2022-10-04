@@ -3,17 +3,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:model="clr-namespace:GrpcExample.ViewModels"
         xmlns:local="clr-namespace:GrpcExample"
-        mc:Ignorable="d"
+        mc:Ignorable="d" 
+        d:DataContext="{d:DesignInstance model:MainWindowModel}"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" Width="120"
-                Name="butQuery" Click="butQuery_Click">查询</Button>
-        <DataGrid CanUserAddRows="False" Grid.Row="1">
+        <StackPanel Orientation="Horizontal" Height="30">
+            <StackPanel.Resources>
+                <Style TargetType="ContentControl">
+                    <Setter Property="FontSize" Value="16"/>
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock VerticalAlignment="Center">开始时间</TextBlock>
+            <DatePicker SelectedDate="{Binding StartDate}" Width="160"/>
+            <TextBlock VerticalAlignment="Center" Margin="20 0 0 0">结束时间</TextBlock>
+            <DatePicker SelectedDate="{Binding EndDate}" Width="160"/>
+            <Button Width="120" Name="butQuery" Click="butQuery_Click">查询</Button>     
+        </StackPanel>
+
+        <DataGrid Name="dataGrid" CanUserAddRows="False" Grid.Row="1" RowHeaderWidth="45"
+                  LoadingRow="dataGrid_LoadingRow">
 
         </DataGrid>
     </Grid>
